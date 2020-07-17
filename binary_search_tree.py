@@ -109,3 +109,47 @@ class BST:
             successor.right_child = node_to_delete.right_child
         return successor
 
+    def print_self(self):
+        length = 100
+        half_length = int(length / 2)
+        space = ' '
+        empty_node = '--'
+        current = self.root
+        current_left = current.left_child
+        current_right = current.right_child
+        print(f'{space * half_length}{self.root.key}')
+        # while(current_left is not None or current_right is not None):
+        #     length = int(length / 2)
+        #     left_length = int(length / 2)
+        #     right_length = int(length / 2) + length
+        #     print_left = empty_node if current_left is None else current_left.key
+        #     print_right = empty_node if current_right is None else current_right.key
+        #     print(f'{space * left_length}{print_left}{space * length}{print_right}')
+            
+        #     current_left = None if current_left is None else current_left.left_child
+        #     current_right = None if current_right is None else current_right.right_child
+        self.recursive_print(current_left, current_right, length)
+
+    def recursive_print(self, current_left, current_right, length):
+        if current_left is not None or current_right is not None:
+            space = ' '
+            empty_node = '--'
+            length = int(length / 2)
+            left_length = int(length / 2)
+            # right_length = int(length / 2) + length
+            print_left = empty_node if current_left is None else current_left.key
+            print_right = empty_node if current_right is None else current_right.key
+            print(f'{space * left_length}{print_left}{space * length}{print_right}')
+            
+            current_left_left = None if current_left is None else current_left.left_child
+            current_left_right = None if current_left is None else current_left.right_child
+            self.recursive_print(current_left_left, current_left_right, length)
+
+            current_right_left = None if current_right is None else current_right.left_child
+            current_right_right = None if current_right is None else current_right.right_child
+            self.recursive_print(current_right_left, current_right_right, length)
+        # else if current_left is None:
+
+
+
+
