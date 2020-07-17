@@ -57,14 +57,13 @@ class BST:
         # found node
         node_to_delete = current_node
         # check leaf node
-        if node_to_delete.left_child is None \
-        and node_to_delete.right_child is None:
+        if node_to_delete.left_child is None and node_to_delete.right_child is None:
             if node_to_delete == self.root:
                 self.root = None
             elif is_left_child:
-                parent_node.left_child is None
+                parent_node.left_child = None
             else:
-                parent_node.right_child is None
+                parent_node.right_child = None
         # check for 1 child that is on the left
         elif node_to_delete.right_child is None:
             if node_to_delete == self.root:
@@ -85,8 +84,8 @@ class BST:
         else:
             # connect parrent of node to delete to successor
             successor = self.get_successor(node_to_delete)
-            if node_to_delete == root:
-                root = successor
+            if node_to_delete == self.root:
+                self.root = successor
             elif is_left_child:
                 parent_node.left_child = successor
             else:
