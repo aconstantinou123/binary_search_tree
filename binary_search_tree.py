@@ -110,6 +110,20 @@ class BST:
             successor.right_child = node_to_delete.right_child
         return successor
     
+
+    def print_self(self):
+        current_depth = 0
+        parent_node = self.root
+        total_depth = self.find_depth(parent_node, 0)
+        node_array = [[] for _ in range(total_depth)]
+        node_array[0].append(str(self.root.key))
+        node_array = self.collect_nodes(parent_node, total_depth, current_depth + 1, node_array)
+        for nodes in node_array:
+            total_length = 10 * total_depth
+            space = int(total_length / (len(nodes) + 1)) * '  '
+            nodes[0] = space + nodes[0]
+            print(space.join(nodes))
+
     def find_depth(self, parent, current_depth):
         left_depth = current_depth
         right_depth = current_depth
@@ -119,27 +133,14 @@ class BST:
             right_depth = self.find_depth(parent.right_child, current_depth)
         max_depth = left_depth if left_depth > right_depth else right_depth
         return max_depth
-    
-
-
-    def print_self(self):
-        current_depth = 0
-        parent_node = self.root
-        total_depth = self.find_depth(parent_node, 0)
-        node_array = [[] for _ in range(total_depth)]
-        node_array[0].append(self.root.key)
-        node_array = self.collect_nodes(parent_node, total_depth, current_depth + 1, node_array)
-        for nodes in node_array:
-            print(nodes)
-
 
     def collect_nodes(self, parent_node, total_depth, current_depth, node_array):
         if current_depth < total_depth:
             empty_node = '--'
             left_node = None if parent_node is None else parent_node.left_child
             right_node = None if parent_node is None else parent_node.right_child
-            print_left = empty_node if left_node is None else left_node.key
-            print_right = empty_node if right_node is None else right_node.key
+            print_left = empty_node if left_node is None else str(left_node.key)
+            print_right = empty_node if right_node is None else str(right_node.key)
             node_array[current_depth].append(print_left)
             node_array[current_depth].append(print_right)
             node_array = self.collect_nodes(left_node, total_depth, current_depth + 1, node_array)
